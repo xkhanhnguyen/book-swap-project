@@ -92,6 +92,19 @@ class BookInstance(models.Model):
         help_text='Book Condition',
     )
 
+    BOOK_TYPE = (
+        ('h', 'Hardcover'),
+        ('p', 'Paperback'),
+    )
+
+    type = models.CharField(
+        max_length=1,
+        choices=BOOK_TYPE,
+        blank=True,
+        default='m',
+        help_text='Book type',
+    )
+
     class Meta:
         ordering = ['date_posted']
 
