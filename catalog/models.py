@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse # Used to generate URLs by reversing the URL patterns
 import uuid # Required for unique book instances
-
+import datetime
 
 class Genre(models.Model):
     """Model representing a book genre."""
@@ -61,7 +61,8 @@ class BookInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular book across whole library')
     book = models.ForeignKey('Book', on_delete=models.RESTRICT, null=True)
     imprint = models.CharField(max_length=200)
-    date_posted = models.DateField(null=True, blank=True)
+    date_posted = models.DateField(("Date"), default=datetime.date.today)
+
 
     SWAP_STATUS = (
         ('a', 'Available'),

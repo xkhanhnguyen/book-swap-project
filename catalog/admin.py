@@ -42,7 +42,7 @@ class BookInstanceAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('book', 'imprint', 'id')
+            'fields': ('book', 'condition', 'imprint', 'id')
         }),
         ('Availability', {
             'fields': ('status', 'date_posted')
