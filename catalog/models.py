@@ -76,6 +76,21 @@ class BookInstance(models.Model):
         help_text='Book availability',
     )
 
+    BOOK_CONDITION = (
+        ('l', 'Like New'),
+        ('v', 'Very Good'),
+        ('g', 'Good'),
+        ('a', 'Acceptable'),
+    )
+
+    condition = models.CharField(
+        max_length=1,
+        choices=BOOK_CONDITION,
+        blank=True,
+        default='m',
+        help_text='Book Condition',
+    )
+
     class Meta:
         ordering = ['date_posted']
 
