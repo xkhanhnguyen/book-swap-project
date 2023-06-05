@@ -16,6 +16,9 @@
     <li><strong>Genre:<strong> {{ num_genre }}</li>
     <li><strong>Authors:</strong> {{ num_authors }}</li>
   </ul>
+  <p>
+    You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.
+  </p>
 {% endblock %}
 
 <!-- Add additional CSS in static file -->
