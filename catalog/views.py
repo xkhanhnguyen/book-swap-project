@@ -65,3 +65,12 @@ class AuthorListView(generic.ListView):
 class AuthorDetailView(generic.DetailView):
     """Generic class-based detail view for an author."""
     model = Author
+
+class GenreListView(generic.ListView):
+    """Generic class-based list view for a list of genres."""
+    model = Genre
+    paginate_by = 10 # reducing the number of items displayed on each page
+
+class GenreDetailView(generic.DetailView):
+    """Generic class-based detail view for an genre."""
+    model = Genre
