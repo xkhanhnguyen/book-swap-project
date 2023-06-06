@@ -9,11 +9,12 @@
       {% for bookinst in bookinstance_list %}
       <li class="{% if bookinst.days_since_posted %}text-danger{% endif %}">
         <a href="{% url 'book-detail' bookinst.book.pk %}">{{ bookinst.book.title }}</a> ({{ bookinst.date_posted }})
+        <a>{{ bookinst.status}}</a> 
       </li>
       {% endfor %}
     </ul>
 
     {% else %}
-      <p>There are no books borrowed.</p>
+      <p>There are no books to swap.</p>
     {% endif %}
 {% endblock %}

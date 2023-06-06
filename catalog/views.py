@@ -83,7 +83,7 @@ class GenreDetailView(generic.DetailView):
 
 
 
-class SwappedBooksByUserListView(LoginRequiredMixin,generic.ListView):
+class SwappedBooksByUserListView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view listing books on swapped to current user."""
     model = BookInstance
     template_name = 'catalog/bookinstance_list_swapped_user.html'
@@ -94,4 +94,16 @@ class SwappedBooksByUserListView(LoginRequiredMixin,generic.ListView):
             BookInstance.objects.filter(swapped_with=self.request.user)
             .filter(status__exact='s')
             .order_by('date_posted')
+        )
+
+class SwappedBooksByAllListView(LoginRequiredMixin, generic.ListView):
+    """Generic class-based view listing books on swapped, only visible to staff --user who can mark as swapped."""
+    model = BookInstance
+    permission_required = 'catalog.can_mark_swapped'
+    template_name = 'catalog/bookinstance_list_swapped_user.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return (
+            BookInstance.objects.order_by('date_posted')
         )
