@@ -14,4 +14,6 @@ urlpatterns = [
     path('genres/', views.GenreListView.as_view(), name='genres'),
     path('genre/<int:pk>', views.GenreDetailView.as_view(), name='genre-detail'),
 
+    path('mybooks/', views.SwappedBooksByUserListView.as_view(), name='my-swapped-book'),
 ]
+

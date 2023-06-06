@@ -1,7 +1,9 @@
 from django.db import models
 from django.urls import reverse # Used to generate URLs by reversing the URL patterns
 import uuid # Required for unique book instances
+from django.contrib.auth.models import User
 import datetime
+from datetime import date
 
 class Genre(models.Model):
     """Model representing a book genre."""
@@ -69,7 +71,7 @@ class BookInstance(models.Model):
     book = models.ForeignKey('Book', on_delete=models.RESTRICT, null=True)
     imprint = models.CharField(max_length=200)
     date_posted = models.DateField(("Date"), default=datetime.date.today)
-
+    swapped_with = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     SWAP_STATUS = (
         ('a', 'Available'),
@@ -114,10 +116,16 @@ class BookInstance(models.Model):
 
     class Meta:
         ordering = ['date_posted']
+        permissions = (("can_mark_swapped", "Set book as shipped"),)
 
     def __str__(self):
         """String for representing the Model object."""
         return f'{self.id} ({self.book.title})'
+    
+    @property
+    def days_since_posted(self):
+        """Determines how many days since the book posted based on posted date and current date."""
+        return bool(self.date_posted and date.today() > self.date_posted)
 
 
 
