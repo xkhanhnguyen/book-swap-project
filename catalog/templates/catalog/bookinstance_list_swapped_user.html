@@ -10,6 +10,7 @@
       <li class="{% if bookinst.days_since_posted %}text-danger{% endif %}">
         <a href="{% url 'book-detail' bookinst.book.pk %}">{{ bookinst.book.title }}</a> ({{ bookinst.date_posted }})
         <a>{{ bookinst.status}}</a> 
+        {% if perms.catalog.can_mark_returned %}- <a href="{% url 'renew-book-librarian' bookinst.id %}">Renew</a>{% endif %}
       </li>
       {% endfor %}
     </ul>

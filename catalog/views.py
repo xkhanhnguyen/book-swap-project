@@ -5,6 +5,21 @@ from django.views import generic
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+
+import datetime
+
+from django.contrib.auth.decorators import login_required, permission_required
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+from catalog.forms import RenewBookForm
+
+
+
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from catalog.models import Author
+
 def index(request):
     """View function for home page of site."""
 
@@ -107,3 +122,64 @@ class SwappedBooksByAllListView(LoginRequiredMixin, generic.ListView):
         return (
             BookInstance.objects.order_by('date_posted')
         )
+    
+@login_required
+@permission_required('catalog.can_mark_swapped', raise_exception=True)
+def renew_book_librarian(request, pk):
+    """View function for renewing a specific BookInstance by librarian."""
+
+    """
+    Get_object_or_404:
+    - Returns a specified object from a model based on its primary key value, and raises an Http404 exception (not found) if the record does not exist.
+    - Use the pk argument in get_object_or_404() to get the current BookInstance 
+        (if this does not exist, the view will immediately exit and the page will display a "not found" error)
+    """
+    book_instance = get_object_or_404(BookInstance, pk=pk)
+
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = RenewBookForm(request.POST)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
+            book_instance.due_back = form.cleaned_data['renewal_date']
+            book_instance.save()
+
+            """
+            Redirect to a new URL:
+            -  HttpResponseRedirect: This creates a redirect to a specified URL (HTTP status code 302).
+            -  reverse(): This generates a URL from a URL configuration name and a set of arguments. 
+                It is the Python equivalent of the url tag that we've been using in our templates.
+            """
+            return HttpResponseRedirect(reverse('all-books'))
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        proposed_renewal_date = datetime.date.today() + datetime.timedelta(weeks=3)
+        form = RenewBookForm(initial={'renewal_date': proposed_renewal_date})
+
+    context = {
+        'form': form,
+        'book_instance': book_instance,
+    }
+
+    # render() to create the HTML page, specifying the template and a context that contains our form
+    return render(request, 'catalog/book_renew_librarian.html', context)
+
+
+
+class AuthorCreate(CreateView):
+    model = Author
+    fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
+    initial = {'date_of_death': '13/33/3000'}
+
+class AuthorUpdate(UpdateView):
+    model = Author
+    fields = '__all__' # Not recommended (potential security issue if more fields added)
+
+class AuthorDelete(DeleteView):
+    model = Author
+    success_url = reverse_lazy('authors')

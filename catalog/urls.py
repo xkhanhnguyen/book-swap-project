@@ -15,6 +15,11 @@ urlpatterns = [
     path('genre/<int:pk>', views.GenreDetailView.as_view(), name='genre-detail'),
 
     path('mybooks/', views.SwappedBooksByUserListView.as_view(), name='my-swapped-book'),
-    path('allbooks/', views.SwappedBooksByAllListView.as_view(), name='all-books')
+    path('allbooks/', views.SwappedBooksByAllListView.as_view(), name='all-books'), 
+
+    # Add URLConf for librarian to renew a book.
+    path('book/<uuid:pk>/renew/', views.renew_book_librarian, name='renew-book-librarian'),
 ]
+
+
 
