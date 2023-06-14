@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# python3 manage.py test
+
+# To get more information about the test run
+# python3 manage.py test --verbosity 2 
+
+# Speeding things up
+# python3 manage.py test --parallel auto 
+
+
+# Run the specified module
+# python3 manage.py test catalog.tests
+
+# Run the specified module
+# python3 manage.py test catalog.tests.test_models
+
+# Run the specified class
+# python3 manage.py test catalog.tests.test_models.AuthorModelTest
+# python3 manage.py test catalog.tests.test_forms.RenewBookFormTest
+# python3 manage.py test catalog.tests.test_views.AuthorListViewTest
+python3 manage.py test catalog.tests.test_views.LoanedBookInstancesByUserListViewTest
+
+
+
+
+# Run the specified method
+# python3 manage.py test catalog.tests.test_models.YourTestClass.def_function_name
