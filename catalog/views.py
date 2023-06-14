@@ -22,6 +22,7 @@ from catalog.models import Author
 from catalog.models import Book
 
 
+
 def index(request):
     """View function for home page of site."""
 
