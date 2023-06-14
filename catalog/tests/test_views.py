@@ -218,7 +218,6 @@ class RenewBookInstancesViewTest(TestCase):
         response = self.client.post(reverse('renew-book-librarian', kwargs={'pk':self.test_bookinstance1.pk,}), {'renewal_date':valid_date_in_future})
         self.assertRedirects(response, reverse('all-borrowed'))
 
-
     def test_form_invalid_renewal_date_past(self):
         login = self.client.login(username='testuser2', password='2HJ1vRV0Z&3iD')
         date_in_past = datetime.date.today() - datetime.timedelta(weeks=1)
