@@ -19,12 +19,18 @@
     {% csrf_token %}
     <div class="row">
       <div class="col-md-10 form-group">
-          <label for="username">Username</label>
+          <label for="username">User name</label>
           <input type="text" id="username" name="username" class="form-control" required>
       </div>
       <div class="col-md-10 form-group">
           <label for="password">Password</label>
           <input type="password" id="password" name="password" class="form-control" required>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="dropdownCheck">
+        <label class="form-check-label" for="dropdownCheck">
+          Remember me
+        </label>
       </div>
     </div>
     <div class="row">
@@ -34,7 +40,10 @@
     </div>
   </form>
 
+  <div class="dropdown-divider"></div>
+  <a class="dropdown-item" href="#">New around here? Sign up</a>
   {# Assumes you setup the password_reset view in your URLconf #}
-  <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-
+  <p><a class="dropdown-item" href="{% url 'password_reset' %}">Forgot password?</a></p>
+  
 {% endblock %}
+
