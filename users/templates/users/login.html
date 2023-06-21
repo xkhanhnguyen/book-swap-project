@@ -1,0 +1,70 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<section class="site-section">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h1>Sign In</h1>
+            </div>
+        </div>
+        <div class="row blog-entries">
+            <div class="col-md-12 col-lg-8 main-content">
+
+
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <a href="{% url 'social:begin' 'github' %}" class="btn btn-link btn-lg active btn-block">Sign in with GitHub</a>
+                                <a href="#" class="btn btn-link btn-lg active btn-block">Sign in with Google</a>
+                                <hr>
+                                <p class="text-center"><strong>OR</strong></p>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 form-group">
+                            <label for="username">User name</label>
+                            <input type="text" id="username" name="username" class="form-control" required>
+                        </div>
+                        <div class="col-md-10 form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <!-- Add a Remember me functionality -->
+                                    {{ form.remember_me }}
+                                    <label> Remember me</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input type="submit" value="Sign In" class="btn btn-dark">
+                        </div>
+                    </div>
+                </form>
+                {% if form.errors %}
+                <p>Your username and password didn't match. Please try again.</p>
+                {% endif %}
+
+                {% if next %}
+                {% if user.is_authenticated %}
+                <p>Your account doesn't have access to this page. To proceed,
+                    please sign in with an account that has access.</p>
+                {% else %}
+                <p>Please sign in to see this page.</p>
+                {% endif %}
+                {% endif %}
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'users-register' %}">Don't have an account yet? Sign up</a>
+                {# Assumes you setup the password_reset view in your URLconf #}
+                <p><a class="dropdown-item" href="{% url 'password-reset' %}">Forgot password?</a></p>
+
+                {% endblock %}

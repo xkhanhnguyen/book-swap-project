@@ -13,9 +13,12 @@
         {% if perms.catalog.can_mark_returned %}- <a href="{% url 'renew-book-librarian' bookinst.id %}">Renew</a>{% endif %}
       </li>
       {% endfor %}
+
+      <p><a class="dropdown-item" href="{% url 'book-create' %}">Add a book to swap?</a></p>
     </ul>
 
     {% else %}
       <p>There are no books to swap.</p>
+      <p><a class="dropdown-item" href="{% url 'book-create' %}">Add a book to swap?</a></p>
     {% endif %}
 {% endblock %}

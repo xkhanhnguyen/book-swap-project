@@ -22,3 +22,6 @@ Started on
 ## Install
 Project is created with:
 * Python
+* pip install social-auth-app-django
+* pip install pillow
+* pip install django-ckeditor

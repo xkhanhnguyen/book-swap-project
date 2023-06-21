@@ -2,10 +2,11 @@ from django.shortcuts import render
 
 from .models import Book, Author, BookInstance, Genre
 from django.views import generic
+from itertools import chain
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
-
+from django.db.models import Q
 import datetime
 
 from django.contrib.auth.decorators import login_required, permission_required
@@ -14,13 +15,17 @@ from django.urls import reverse
 
 from catalog.forms import RenewBookForm
 
-
-
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from catalog.models import Author
 from catalog.models import Book
 
+from django.db.models import Value
+from django.db.models.functions import Concat
+
+from django.utils.text import slugify
+from django.contrib import messages
+from extra_views import CreateWithInlinesView, InlineFormSetFactory
 
 
 def index(request):
@@ -117,7 +122,6 @@ class SwappedBooksByUserListView(LoginRequiredMixin, generic.ListView):
 class SwappedBooksByAllListView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view listing books on swapped, only visible to staff --user who can mark as swapped."""
     model = BookInstance
-    permission_required = 'catalog.can_mark_swapped'
     template_name = 'catalog/bookinstance_list_swapped_user.html'
     paginate_by = 10
 
@@ -174,7 +178,7 @@ def renew_book_librarian(request, pk):
 
 
 #  Create, update and delete authors
-class AuthorCreate(CreateView):
+class AuthorCreate(InlineFormSetFactory):
     model = Author
     fields = ['first_name', 'last_name', 'date_of_birth']
 
@@ -189,17 +193,56 @@ class AuthorDelete(DeleteView):
 
 
 #  Create, update and delete books
-class BookCreate(PermissionRequiredMixin, CreateView):
+class BookCreateView(LoginRequiredMixin, CreateWithInlinesView):
+    model = Book
+    inclines = [Author]
+    fields = ['title', 'summary', 'isbn', 'genre']
+
+    def get_success_url(self):
+        messages.success(
+            self.request, 'Your book-swap has been created successfully.')
+        return reverse_lazy('book')
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.author = self.request.user
+        obj.slug = slugify(form.cleaned_data['title'])
+        obj.save()
+        return super().form_valid(form)
+
+class BookUpdateView(LoginRequiredMixin, UpdateView):
     model = Book
     fields = ['title', 'author', 'summary', 'isbn', 'genre']
-    permission_required = 'catalog.can_mark_swapped'
 
-class BookUpdate(PermissionRequiredMixin, UpdateView):
-    model = Book
-    fields = ['title', 'author', 'summary', 'isbn', 'genre']
-    permission_required = 'catalog.can_mark_swapped'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        update = True
+        context['update'] = update
 
-class BookDelete(PermissionRequiredMixin, DeleteView):
+        return context
+
+    def get_success_url(self):
+        messages.success(
+            self.request, 'Your book has been updated successfully.')
+        return reverse_lazy('book')
+
+    def get_queryset(self):
+        return self.model.objects.filter(author=self.request.user)
+
+class BookDeleteView(LoginRequiredMixin, DeleteView):
     model = Book
-    success_url = reverse_lazy('books')
-    permission_required = 'catalog.can_mark_swapped'
+    def get_success_url(self):
+        messages.success(
+            self.request, 'Your post has been deleted successfully.')
+        return reverse_lazy('book')
+
+    def get_queryset(self):
+        return self.model.objects.filter(author=self.request.user)
+
+def search(request):
+    q = request.GET["search_query"] #The empty string handles an empty "request"
+
+    books = Book.objects.filter(title__icontains=q)
+    authors = Author.objects.annotate(full_name=Concat('first_name', Value(' '), 'last_name')).filter(full_name__icontains=q) 
+    return render(request, "catalog/search_results.html", {'books':books, 'authors':authors, 'page_name':'Search Results', 'q':q})
+

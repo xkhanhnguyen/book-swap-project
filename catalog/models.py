@@ -4,13 +4,14 @@ import uuid # Required for unique book instances
 from django.contrib.auth.models import User
 import datetime
 from datetime import date
+from django.db.models.functions import Lower
 
 class Genre(models.Model):
     """Model representing a book genre."""
     name = models.CharField(max_length=200, help_text='Enter a book genre (e.g. Science Fiction)')
 
     class Meta:
-        ordering = ['name']
+        ordering = [Lower('name')]
     
     def get_absolute_url(self):
         """Returns the URL to access a particular genre instance."""
@@ -48,6 +49,9 @@ class Book(models.Model):
     # ManyToManyField used because genre can contain many books. Books can cover many genres.
     # Genre class has already been defined so we can specify the object above.
     genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
+
+    class Meta:
+        ordering = [Lower('title')]
 
     def __str__(self):
         """String for representing the Model object."""
@@ -137,7 +141,7 @@ class Author(models.Model):
     # date_of_death = models.DateField('Died', null=True, blank=True)
 
     class Meta:
-        ordering = ['last_name', 'first_name']
+        ordering = ['last_name', Lower('first_name')]
 
     def get_absolute_url(self):
         """Returns the URL to access a particular author instance."""
