@@ -2,6 +2,18 @@
 
 {% block content %}
 <form action="" method="post">
+  {% if post.image %}
+  <img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.title }}">
+{% endif %}
+{% if post.author == request.user %}
+<div class="mt-4 mx-3">
+  <a class="btn btn-primary" href="{% url 'catalog:book_update' book.id %}">Edit</a>
+  <a class="btn btn-danger" href="{% url 'catalog:book_delete' book.id %}">Delete</a>
+</div>
+{% endif %}
+<div class="card-text mt-5 p-4">
+  {{ post.content }}
+</div>
   {% csrf_token %} <!--declare the {% csrf_token %} to ensure that our forms are resistant to CSRF attacks -->
   <table>
     {{ form.as_table }}

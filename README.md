@@ -25,3 +25,4 @@ Project is created with:
 * pip install social-auth-app-django
 * pip install pillow
 * pip install django-ckeditor
+* pip install django-environ

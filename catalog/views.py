@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .models import Book, Author, BookInstance, Genre
 from django.views import generic
@@ -196,19 +196,21 @@ class AuthorDelete(DeleteView):
 class BookCreateView(LoginRequiredMixin, CreateWithInlinesView):
     model = Book
     inclines = [Author]
-    fields = ['title', 'summary', 'isbn', 'genre']
+    fields = ['title', 'author', 'summary', 'isbn', 'genre']
+    template_name = 'catalog/book_form.html'
 
     def get_success_url(self):
         messages.success(
             self.request, 'Your book-swap has been created successfully.')
-        return reverse_lazy('book')
+        # return reverse_lazy('book')
+        return self.object.get_absolute_url()
 
-    def form_valid(self, form):
-        obj = form.save(commit=False)
-        obj.author = self.request.user
-        obj.slug = slugify(form.cleaned_data['title'])
-        obj.save()
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     obj = form.save(commit=False)
+    #     obj.user = self.request.user
+    #     obj.slug = slugify(form.cleaned_data['title'])
+    #     obj.save()
+    #     return super().form_valid(form)
 
 class BookUpdateView(LoginRequiredMixin, UpdateView):
     model = Book
