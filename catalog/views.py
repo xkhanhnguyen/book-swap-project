@@ -106,23 +106,24 @@ class GenreDetailView(generic.DetailView):
 
 
 
-class SwappedBooksByUserListView(LoginRequiredMixin, generic.ListView):
+class BooksByUserListView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view listing books on swapped to current user."""
     model = BookInstance
-    template_name = 'catalog/bookinstance_list_swapped_user.html'
+    template_name = 'catalog/bookinstance_list_by_user.html'
     paginate_by = 10
 
     def get_queryset(self):
-        return (
-            BookInstance.objects.filter(swapped_with=self.request.user)
-            .filter(status__exact='s')
-            .order_by('date_posted')
-        )
+        logged_in_user_posts = Post.objects.filter(author=request.user)
+        return render(request, 'blog/post_list.html', {'posts': logged_in_user_posts})
+        # return (
+        #     BookInstance.objects.filter(user=self.request.user)
+        #     .order_by('date_posted')
+        # )
 
-class SwappedBooksByAllListView(LoginRequiredMixin, generic.ListView):
+class BooksByAllListView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view listing books on swapped, only visible to staff --user who can mark as swapped."""
     model = BookInstance
-    template_name = 'catalog/bookinstance_list_swapped_user.html'
+    template_name = 'catalog/bookinstance_list_by_user.html'
     paginate_by = 10
 
     def get_queryset(self):
@@ -196,7 +197,7 @@ class AuthorDelete(DeleteView):
 class BookCreateView(LoginRequiredMixin, CreateWithInlinesView):
     model = Book
     inclines = [Author]
-    fields = ['title', 'author', 'summary', 'isbn', 'genre']
+    fields = ['title', 'author', 'summary', 'genre']
     template_name = 'catalog/book_form.html'
 
     def get_success_url(self):
@@ -214,7 +215,7 @@ class BookCreateView(LoginRequiredMixin, CreateWithInlinesView):
 
 class BookUpdateView(LoginRequiredMixin, UpdateView):
     model = Book
-    fields = ['title', 'author', 'summary', 'isbn', 'genre']
+    fields = ['title', 'author', 'summary',  'genre']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

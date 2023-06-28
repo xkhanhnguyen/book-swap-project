@@ -43,8 +43,8 @@ class Book(models.Model):
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
 
     summary = models.TextField(max_length=1000, help_text='Enter a brief description of the book')
-    isbn = models.CharField('ISBN', max_length=13, unique=True,
-                             help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
+    # isbn = models.CharField('ISBN', max_length=13, unique=True,
+    #                          help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
 
     # ManyToManyField used because genre can contain many books. Books can cover many genres.
     # Genre class has already been defined so we can specify the object above.
@@ -75,7 +75,7 @@ class BookInstance(models.Model):
     book = models.ForeignKey('Book', on_delete=models.RESTRICT, null=True)
     imprint = models.CharField(max_length=200)
     date_posted = models.DateField(("Date"), default=datetime.date.today)
-    swapped_with = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     SWAP_STATUS = (
         ('a', 'Available'),
@@ -120,7 +120,7 @@ class BookInstance(models.Model):
 
     class Meta:
         ordering = ['date_posted']
-        permissions = (("can_mark_swapped", "Set book as shipped"),)
+        # permissions = (("can_mark_swapped", "Set book as shipped"),)
 
     def __str__(self):
         """String for representing the Model object."""

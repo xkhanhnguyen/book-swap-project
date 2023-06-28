@@ -1,19 +1,19 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1>Swapped books</h1>
+    <h1>My Books</h1>
 
-    {% if bookinstance_list %}
+    <!-- {% if bookinstance_list %}
     <ul>
 
       {% for bookinst in bookinstance_list %}
       <li class="{% if bookinst.days_since_posted %}text-danger{% endif %}">
         <a href="{% url 'book-detail' bookinst.book.pk %}">{{ bookinst.book.title }}</a> ({{ bookinst.date_posted }})
         <a>{{ bookinst.status}}</a> 
-        {% if perms.catalog.can_mark_returned %}- <a href="{% url 'renew-book-librarian' bookinst.id %}">Renew</a>{% endif %}
+         {% if perms.catalog.can_mark_returned %}- <a href="{% url 'renew-book-librarian' bookinst.id %}">Renew</a>{% endif %} 
       </li>
-      {% endfor %}
-
+      {% endfor %} -->
+      
       <p><a class="dropdown-item" href="{% url 'book-create' %}">Add a book to swap?</a></p>
     </ul>
 

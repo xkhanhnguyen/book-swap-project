@@ -16,7 +16,7 @@ in case login to admin site and got the error (User has no profile) ![Alt text](
 
 -Enter a python terminal in your virtual environment
 
-```python manage.py shell```
+```python3 manage.py shell```
 
 -Run this, will fix your issue without blowing out the database
 ```

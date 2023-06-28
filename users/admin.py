@@ -3,4 +3,3 @@ from .models import Profile
 from django.contrib.auth.admin import UserAdmin
 admin.site.register(Profile)
 
-
