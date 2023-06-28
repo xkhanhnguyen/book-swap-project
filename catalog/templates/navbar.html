@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Bookswap</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'books' %}">Book</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Browse
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Recommendations</a>
+                        <a class="dropdown-item" href="#">Recently added</a>
+                        <a class="dropdown-item" href="#">Most offered</a>
+                    </div>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li> -->
+            </ul>
+            <form method="get" class="form-inline my-2 my-lg-0" action="{% url 'search-results'%}">
+                <input class="form-control mr-sm-2" type="search" placeholder="Book, Author..." aria-label="Search"
+                    name="search_query">
+            </form>
+
+            <ul><a class="nav-item">
+                {% if user.is_authenticated %}
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                        {{ user.get_username }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown05">
+                        <li><a class="dropdown-item" href="#"><i class="fa fa-id-card"></i> Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'my-swapped-book' %}"><i class="fa fa-plus"></i> My
+                                Books</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li><a class="dropdown-item" href="{% url 'users-profile' %}"><i class="fa fa-id-card"></i>
+                                Account settings</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa fa-id-card"></i> Helps</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-id-card"></i> Sign
+                                out</a></li>
+                    </ul>
+                </div>
+                {% else %}
+                    <ul><a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">Sign in</a></ul>
+                {% endif %}
+            </ul>
+
+            {% if user.is_staff %}
+            <hr>
+            <ul class="nav-item">
+                <li>Staff</li>
+                {% if perms.catalog.can_mark_swapped %}
+                <li><a href="{% url 'all-books' %}">All books</a></li>
+                {% endif %}
+            
+            {% endif %}
+            </ul>
+            </hr>
+
+        </div>
+    </div>
+</nav>

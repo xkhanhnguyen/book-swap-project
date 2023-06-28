@@ -3,6 +3,7 @@
 
 <head>
   {% block title %}
+  {% include "navbar.html" %}
   <title>BookSwap</title>
   {% endblock %}
   <meta charset="utf-8" />
@@ -24,59 +25,6 @@
         <!-- <div class="container"> -->
         <div class="collapse navbar-collapse" id="navbarMenu">
           <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'index' %}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'books' %}">Books</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'authors' %}">Authors</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'genres' %}">Genres</a>
-            </li>
-
-            <form method="get" class="search-form" action="{% url 'search-results'%}">
-              {% csrf_token %}
-              <input type="text" placeholder="Book, Author..." name="search_query">
-              <!-- <button type="submit" class="btn btn-info btn-lg btn-block text-white btn-search">Search</button> -->
-            </form>
-
-            <li class="nav-item">
-              {% if user.is_authenticated %}
-              <!-- <li>{{ user.get_username }}</li> -->
-              <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="" id="dropdownMenuLink" data-bs-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-user"></i>
-                  {{ user.get_username }}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdown05">
-                  <li><a class="dropdown-item" href="{% url 'users-profile' %}"><i class="fa fa-id-card"></i> Profile</a></li>
-                  <li><a class="dropdown-item" href="{% url 'my-swapped-book' %}"><i class="fa fa-plus"></i> My
-                      Books</a></li> 
-                  <div class="dropdown-divider"></div>
-                  <li><a class="dropdown-item" href="#"><i class="fa fa-id-card"></i> Account settings</a></li>
-                  <li><a class="dropdown-item" href="#"><i class="fa fa-id-card"></i> Helps</a></li>
-                  <li><a class="dropdown-item" href="{% url 'logout' %}"><i
-                        class="fa fa-id-card"></i> Sign out</a></li>
-                </ul>
-              </div>
-              {% else %}
-            <li><a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">Sign in</a></li>
-            {% endif %}
-            </li>
-
-            {% if user.is_staff %}
-            <hr>
-            <ul class="nav-item">
-              <li>Staff</li>
-              {% if perms.catalog.can_mark_swapped %}
-              <li><a href="{% url 'all-books' %}">All books</a></li>
-              {% endif %}
-            </ul>
-            {% endif %}
           </ul>
         </div>
       </nav>
