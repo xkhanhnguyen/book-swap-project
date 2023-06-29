@@ -47,13 +47,13 @@ body {
 }
 
 a {
-  color: #52D681;
+  color: #0000FF;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
 }
 a:hover, a:active, a:focus {
-  color: #52D681;
+  color: #FF0000;
   outline: none;
   text-decoration: none;
 }
@@ -226,7 +226,7 @@ h1, h2, h3, h4, h5, h6, figure {
   display: block;
   color: #999999;
   line-height: 1.2;
-  text-transform: none;
+  text-transform: lowercase;
   font-size: 15px;
 }
 .gtco-nav ul li.has-dropdown .dropdown li a:hover {
