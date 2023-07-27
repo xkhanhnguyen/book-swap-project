@@ -26,3 +26,4 @@ Project is created with:
 * pip install pillow
 * pip install django-ckeditor
 * pip install django-environ
+<!-- * pip install django-book-manager -->

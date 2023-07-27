@@ -2,16 +2,34 @@
 
 
 {% block content %}
-
-  <h1>SWAP YOUR OLD BOOKS FOR EXCITING NEW READS</h1>
-  <p style="font-family: Arial">
-    Get points for every books you offer and swap 
-    And use points to get books you want!
-    (website developed by our beloved 😘
-    <em>Bree 🐕‍🦺</em>!)
+<h1>SWAP YOUR OLD BOOKS FOR EXCITING NEW READS</h1>
+<p style="font-family: Arial">
+  Get points for every books you offer and swap
+  And use points to get books you want!
+  (website developed by our beloved 😘
+  <em>Bree 🐕‍🦺</em>!)
   </head>
-  </p>
-  <h2>Dynamic content</h2>
+</p>
+<!-- Stats section -->
+<section id="stats" >
+  <h2 class="section-heading" data-outlines="Stats">STATS</h2>
+  <div class="all-items">
+    <div class="item">
+      <h2 class="number">{{ num_books }}</h2>
+      <h3 class="stats-sub-heading"></h3>
+      <p>Books Available</p>
+    </div>
+    <div class="item">
+      <h2 class="number">{{ num_instances }}</h2>
+      <h3 class="stats-sub-heading"></h3>
+      <p>Copies</p>
+    </div>
+    <div class="item">
+      <h2 class="number">{{ num_instances_available }}</h2>
+      <h3 class="stats-sub-heading"></h3>
+      <p>Copies available</p>
+    </div>
+  </div>
   <p>The library has the following record counts:</p>
   <ul>
     <li><strong>Books:</strong> {{ num_books }}</li>
@@ -20,21 +38,12 @@
     <li><strong>Genre:<strong> {{ num_genre }}</li>
     <li><strong>Authors:</strong> {{ num_authors }}</li>
   </ul>
-  <p>
-    You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.
-  </p>
+</section>
+<!-- End stats section -->
+<p>
+  <a href="{% url 'login' %}" class="btn btn-dark">Get Started</a>
+</p>
+<p>
+  You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.
+</p>
 {% endblock %}
-
-<!-- Add additional CSS in static file -->
-<!-- use the static template tag and specify the relative URL to the required file. -->
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-
-
-
-<!-- add an image into the page -->
-{% load static %}
-<img
-  src="{% static 'catalog/images/local_library_model_uml.png' %}"
-  alt="UML diagram"
-  style="width:555px;height:540px;" />

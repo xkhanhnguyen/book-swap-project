@@ -57,7 +57,8 @@ INSTALLED_APPS = [
     # Third Party Apps
     'social_django', # Login with other social accounts
     'ckeditor', 
-    'extra_views' # Create models with a CreateView
+    'extra_views', # Create models with a CreateView
+    'book_manager',
 
 ]
 

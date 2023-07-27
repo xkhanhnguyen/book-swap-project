@@ -113,12 +113,13 @@ class BooksByUserListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        logged_in_user_posts = Post.objects.filter(author=request.user)
-        return render(request, 'blog/post_list.html', {'posts': logged_in_user_posts})
-        # return (
-        #     BookInstance.objects.filter(user=self.request.user)
-        #     .order_by('date_posted')
-        # )
+        # logged_in_user_posts = BookInstance.objects.filter(author=self.request.user)
+        # return render(self.request, 'blog/post_list.html', {'posts': logged_in_user_posts})
+        return (
+            BookInstance.objects.filter(user=self.request.user)
+            .filter(status__exact='s')
+            .order_by('date_posted')
+        )
 
 class BooksByAllListView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view listing books on swapped, only visible to staff --user who can mark as swapped."""
