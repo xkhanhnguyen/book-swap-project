@@ -39,6 +39,8 @@ urlpatterns = [
     path('accounts/', include('users.urls')),
     path('', RedirectView.as_view(url='/accounts/', permanent=True)),
 
+    path('store/', include('store.urls')),
+    path('', RedirectView.as_view(url='/store/', permanent=True)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

@@ -50,9 +50,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "catalog.apps.CatalogConfig",
 
+    "store.apps.StoreConfig",
+
     # My Apps
     # "catalog",
     "users",
+    # "store"
 
     # Third Party Apps
     'social_django', # Login with other social accounts
