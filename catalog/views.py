@@ -204,15 +204,7 @@ class BookCreateView(LoginRequiredMixin, CreateWithInlinesView):
     def get_success_url(self):
         messages.success(
             self.request, 'Your book-swap has been created successfully.')
-        # return reverse_lazy('book')
         return self.object.get_absolute_url()
-
-    # def form_valid(self, form):
-    #     obj = form.save(commit=False)
-    #     obj.user = self.request.user
-    #     obj.slug = slugify(form.cleaned_data['title'])
-    #     obj.save()
-    #     return super().form_valid(form)
 
 class BookUpdateView(LoginRequiredMixin, UpdateView):
     model = Book
