@@ -9,6 +9,9 @@ python3 manage.py check --deploy
 <!-- to get new app(folder) install -->
 python3 manage.py startapp app_name
 
+
+<!-- Run the development web server  -->
+python3 manage.py runserver
 <!--  -->
 # auto activate virtualenv
 function cd() {
