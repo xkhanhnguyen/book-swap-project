@@ -1,5 +1,9 @@
 /* CSS styles for the navbar */
-
+*{
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins',sans-serif;
+}
 
 .header-text h1 {
   font-family: 'Libre Baskerville', serif;
@@ -7,6 +11,11 @@
   font-size: 48px;
   font-weight: 600;
   margin-bottom: 15px;
+}
+
+.navbar .header-text small {
+  font-size: 11px;
+  color: #696a6e;
 }
 /* CSS styles for the navbar brand */
 .navbar{
@@ -69,7 +78,7 @@
 }
 
 /* Form Input Box */
-.form-control {
+.form-control .btn {
   width: 100%; /* Set width to 100% to expand to the full width of its container */
   height: 50px; 
   border-radius: 8px; 
@@ -79,12 +88,7 @@
   box-sizing: border-box; 
 }
 
-.btn:focus,
-.form-control:focus {
-   outline: 0;
-   box-shadow: 0 0 0 0rem rgb(13 110 253 / 25%) !important;
-}
-.navbar .form-control .btn {
+.btn {
   background: none;
   border: none;
   padding: 0;
@@ -92,6 +96,7 @@
   padding-top: 5px;
   padding-right: 5px;
 }
+
 
 .navbar .navbar-nav .login{
   color: #6c5dd4;
