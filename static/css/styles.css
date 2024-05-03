@@ -1,5 +1,13 @@
 /* CSS styles for the navbar */
 
+
+.header-text h1 {
+  font-family: 'Libre Baskerville', serif;
+  color: #2b1811;
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
 /* CSS styles for the navbar brand */
 .navbar{
   display: flex;
@@ -16,39 +24,75 @@
   font-weight: 600;
 }
 
+
+
 /* CSS styles for the navbar links */
-/* .navbar-nav {
-  list-style: none; 
-  margin: 0; 
-  padding: 0; 
-}
-
-.navbar-nav li {
-  display: inline; 
-  margin-right: 10px;
-}
-
-.navbar-nav li a {
-  color: #fff; 
-  text-decoration: none; 
-} */
 .navbar .navbar-nav{
   display: flex;
   align-items: center;
   gap: 2rem;
 }
-.navbar .nav-linkli{
+
+/* Move right */
+@media (min-width: 992px) {
+  .navbar-collapse {
+      display: flex;
+      justify-content: flex-end;
+  }
+}
+
+
+.navbar  .nav-item li{
   list-style: none;
 }
-.navbar .nav-link li a{
+.navbar .nav-item a{
   text-decoration: none;
   color: #131428;
   font-weight: 500;
   transition: 0.3s ease-in-out;
 }
-.navbar .nav-link li a:hover{
+.navbar .nav-item .nav-link a:hover{
   color: #6c5dd4;
 }
+
+
+/* Dropdown Menu */
+.dropdown-menu {
+  background-color: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Dropdown Item */
+.dropdown-item {
+  color: #333; /* Change color as needed */
+  font-size: 15px;
+}
+
+/* Form Input Box */
+.form-control {
+  width: 100%; /* Set width to 100% to expand to the full width of its container */
+  height: 50px; 
+  border-radius: 8px; 
+  border: 2px solid #ccc; 
+  padding: 10px; 
+  font-size: 16px; 
+  box-sizing: border-box; 
+}
+
+.btn:focus,
+.form-control:focus {
+   outline: 0;
+   box-shadow: 0 0 0 0rem rgb(13 110 253 / 25%) !important;
+}
+.navbar .form-control .btn {
+  background: none;
+  border: none;
+  padding: 0;
+  padding-left: 25px;
+  padding-top: 5px;
+  padding-right: 5px;
+}
+
 .navbar .navbar-nav .login{
   color: #6c5dd4;
   background-color: #f1eeff;
@@ -59,6 +103,8 @@
   cursor: pointer;
   font-size: 20px;
 }
+
+
 .navbar-nav .login a{
 color: #6c5dd4;
 text-decoration: none;

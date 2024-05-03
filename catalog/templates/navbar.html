@@ -3,11 +3,13 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         
-        <a class="navbar-brand" href="#">Bookswap</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        <div class="header-text text-center">
+            <h1>Bookswap</h1>
+        </div>
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> -->
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -28,14 +30,15 @@
                         <a class="dropdown-item" href="#">Most offered</a>
                     </div>
                 </li>
-
             </ul>
+            
+
             <form method="get" class="form-inline my-2 my-lg-0" action="{% url 'search-results'%}">
                 <input class="form-control mr-sm-2" type="search" placeholder="Book, Author..." aria-label="Search"
                     name="search_query">
+                <button class="btn" type="search"><img src="../../static/images/search.png"></button>
             </form>
-
-           
+            
 
             <ul><a class="nav-item"></a>
                 {% if user.is_authenticated %}
