@@ -1,4 +1,4 @@
-source .venv/bin/activate
+source .env/bin/activate
 
 chmod +x ./bin/file_name
 
@@ -65,4 +65,4 @@ This will add a user profile for the admin user.
 
 This command will copy the django-ckeditor static and media resources into the directory given by the STATIC_ROOT.
 
-`python manage.py collectstatic`
+`python3 manage.py collectstatic`
