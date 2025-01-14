@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     # My Apps
     # "catalog",
     "users",
-    # "store"
+    # "store",
 
     # Third Party Apps
     'social_django', # Login with other social accounts
