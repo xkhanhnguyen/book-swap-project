@@ -8,11 +8,11 @@
   {% endblock %}
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
 
  
   <!-- CSS only -->
-  <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+  <!-- <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" /> -->
 
   <!-- Add additional CSS in static file -->
   {% load static %}
@@ -33,18 +33,6 @@
 
 <body>
   {% block content %}{% endblock %}
-  <footer class="site-footer w-100 pb-4 pt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h3>About Us</h3>
-          <p>Bree is the cutest.<u>Read More</u></a> </p>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- END footer -->
-
   </div>
   {% block pagination %}
   {% if is_paginated %}
@@ -81,5 +69,15 @@
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
   crossorigin="anonymous"></script>
 </body>
-
+<footer class="site-footer w-100 pb-4 pt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h3>About Us</h3>
+        <p>Bree is the cutest.<u>Read More</u></a> </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- END footer -->
 </html>
