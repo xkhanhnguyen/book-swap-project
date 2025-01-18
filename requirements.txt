@@ -1,0 +1,7 @@
+django
+django-environ
+social-auth-app-django
+django-ckeditor
+django-extra-views
+Pillow
+# book_manager
