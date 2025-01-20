@@ -66,3 +66,17 @@ This will add a user profile for the admin user.
 This command will copy the django-ckeditor static and media resources into the directory given by the STATIC_ROOT.
 
 `python3 manage.py collectstatic`
+
+# if forget superuser name and password
+`python manage.py shell  
+```
+from django.contrib.auth import get_user_model
+
+
+UserModel = get_user_model()
+superusers = UserModel.objects.filter(is_superuser=True)
+for user in superusers:
+    print(user.username)
+```
+then run this to change the password 
+`python manage.py changepassword <username>`

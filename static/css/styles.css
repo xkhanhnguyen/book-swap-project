@@ -3,7 +3,7 @@
 :root {
   --font-family: "Roboto", sans-serif;
   --font-size-base: 0.925rem;
-  --base-color: #6c5dd4;
+  --base-color: #e67e22;
   --text-dark: #3c4250;
   --border-color: #eceef3;
   --background-color: #1e1e1e;
@@ -251,6 +251,9 @@ a {
 .nav-item.dropdown {
   position: relative;
 }
+
+
+
 /* Move right */
 @media (min-width: 992px) {
   .navbar-collapse {
@@ -363,6 +366,113 @@ a {
       background-color: #555;
       color: #fff;
   }
+}
+
+/* index */
+h1, h2, h3 {
+  margin: 0;
+  padding: 0.5em 0;
+  color: var(--text-light-grey);
+}
+
+p {
+  margin: 0.5em 0;
+  font-size: 1rem;
+}
+
+em {
+  color: #e74c3c;
+  font-style: italic;
+}
+
+/* Link Styles */
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5em 1em;
+  background-color: #34495e;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--background-color);
+}
+
+/* Stats Section */
+#stats {
+  background-color: var(--background-color);
+  padding: 2em;
+  border-radius: 10px;
+  margin: 2em 0;
+}
+
+.section-heading {
+  font-size: 1.5rem;
+  margin-bottom: 1em;
+  text-align: center;
+  color: var(--text-light-grey);
+  text-transform: uppercase;
+}
+
+.all-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1em;
+}
+
+.item {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1em;
+  flex: 1 1 30%;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.item h2 {
+  font-size: 2rem;
+  color: #e67e22;
+}
+
+.item p {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+/* List Styles */
+ul {
+  padding-left: 1.5em;
+  margin: 1em 0;
+  list-style-type: disc;
+}
+
+li {
+  margin: 0.5em 0;
+}
+
+strong {
+  color: var(--text-light-grey);
+}
+
+/* Footer Styles */
+p {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #95a5a6;
 }
 
 /* Footer */

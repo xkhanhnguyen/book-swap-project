@@ -13,7 +13,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Browse 
+                     Browse <i>&#9662;</i> <!--small down arrow -->
                     
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -26,21 +26,21 @@
 
 
              <!-- Search Form -->
-             <!-- <form method="get" class="form-inline my-2 my-lg-0 ml-auto" action="{% url 'search-results' %}">
+             <form method="get" class="form-inline my-2 my-lg-0 ml-auto" action="{% url 'search-results' %}">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search_query">
                 <button class="btn" type="submit">
                     <img src="../../static/images/search.png">
                 </button>
-            </form> -->
+            </form>
 
              <!-- User Authentication and Cart -->
              <ul class="navbar-nav">
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ user.get_username }}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Profile</a>
                         <a class="dropdown-item" href="#">My Books</a>
                         <div class="dropdown-divider"></div>
